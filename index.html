@@ -53,6 +53,9 @@
                 <button onclick="showPeriod('jepang')" class="nav-btn bg-red-700 text-white px-6 py-2 rounded-full font-semibold hover:bg-red-800 transition-colors">
                     Jepang (1942-1945)
                 </button>
+                <button onclick="startQuiz()" class="nav-btn bg-purple-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-purple-700 transition-colors">
+                    🧠 Kuis Sejarah
+                </button>
             </div>
         </div>
     </nav>
@@ -203,6 +206,98 @@
             <main class="max-w-4xl mx-auto px-6 py-8">
                 <div class="bg-white rounded-lg shadow-lg p-8">
                     <div id="detail-content" class="text-gray-700 leading-relaxed text-lg"></div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Quiz Page -->
+    <div id="quiz-page" class="hidden fixed inset-0 bg-gradient-to-br from-purple-50 to-indigo-100 z-50 overflow-y-auto">
+        <div class="min-h-screen">
+            <!-- Header -->
+            <header class="bg-gradient-to-r from-purple-600 to-indigo-700 text-white py-6 px-6 shadow-lg">
+                <div class="max-w-4xl mx-auto flex items-center justify-between">
+                    <button onclick="closeQuiz()" class="flex items-center space-x-2 bg-purple-700 hover:bg-purple-800 px-4 py-2 rounded-lg transition-colors">
+                        <span class="text-xl">←</span>
+                        <span>Kembali</span>
+                    </button>
+                    <h1 class="text-2xl md:text-3xl font-bold text-center flex-1 mx-4">🧠 Kuis Sejarah Penjajahan Indonesia</h1>
+                    <div class="w-24"></div> <!-- Spacer for centering -->
+                </div>
+            </header>
+            
+            <!-- Quiz Content -->
+            <main class="max-w-4xl mx-auto px-6 py-8">
+                <!-- Quiz Start Screen -->
+                <div id="quiz-start" class="bg-white rounded-lg shadow-lg p-8 text-center">
+                    <div class="mb-8">
+                        <div class="text-6xl mb-4">🎯</div>
+                        <h2 class="text-3xl font-bold text-gray-800 mb-4">Siap Menguji Pengetahuan Anda?</h2>
+                        <p class="text-lg text-gray-600 mb-6">Kuis ini berisi 20 pertanyaan pilihan ganda tentang sejarah penjajahan Indonesia</p>
+                        <div class="bg-purple-50 p-4 rounded-lg mb-6">
+                            <p class="text-purple-800"><strong>Aturan:</strong></p>
+                            <ul class="text-purple-700 mt-2 space-y-1">
+                                <li>• 20 pertanyaan pilihan ganda</li>
+                                <li>• Setiap jawaban benar mendapat 5 poin</li>
+                                <li>• Tidak ada pengurangan poin untuk jawaban salah</li>
+                                <li>• Hasil akan ditampilkan di akhir kuis</li>
+                            </ul>
+                        </div>
+                        <button onclick="beginQuiz()" class="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-lg text-xl font-semibold transition-colors">
+                            Mulai Kuis
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quiz Questions -->
+                <div id="quiz-questions" class="hidden bg-white rounded-lg shadow-lg p-8">
+                    <!-- Progress Bar -->
+                    <div class="mb-6">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm font-medium text-gray-700">Pertanyaan <span id="current-question">1</span> dari 20</span>
+                            <span class="text-sm font-medium text-gray-700">Skor: <span id="current-score">0</span></span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div id="progress-bar" class="bg-purple-600 h-2 rounded-full transition-all duration-300" style="width: 5%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Question -->
+                    <div class="mb-8">
+                        <h3 id="question-text" class="text-xl font-bold text-gray-800 mb-6"></h3>
+                        <div id="answer-options" class="space-y-3"></div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="flex justify-between">
+                        <button id="prev-btn" onclick="previousQuestion()" class="bg-gray-500 hover:bg-gray-600 text-white px-6 py-2 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                            Sebelumnya
+                        </button>
+                        <button id="next-btn" onclick="nextQuestion()" class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                            Selanjutnya
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quiz Results -->
+                <div id="quiz-results" class="hidden bg-white rounded-lg shadow-lg p-8 text-center">
+                    <div class="mb-8">
+                        <div id="result-emoji" class="text-6xl mb-4"></div>
+                        <h2 class="text-3xl font-bold text-gray-800 mb-4">Kuis Selesai!</h2>
+                        <div class="bg-purple-50 p-6 rounded-lg mb-6">
+                            <p class="text-2xl font-bold text-purple-800 mb-2">Skor Anda: <span id="final-score">0</span>/100</p>
+                            <p class="text-lg text-purple-700">Jawaban Benar: <span id="correct-answers">0</span>/20</p>
+                            <p id="grade-text" class="text-lg font-semibold mt-2"></p>
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="restartQuiz()" class="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-lg text-lg font-semibold transition-colors mr-4">
+                                Ulangi Kuis
+                            </button>
+                            <button onclick="closeQuiz()" class="bg-gray-500 hover:bg-gray-600 text-white px-8 py-3 rounded-lg text-lg font-semibold transition-colors">
+                                Kembali ke Timeline
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </main>
         </div>
@@ -442,12 +537,265 @@
             document.body.style.overflow = 'auto';
         }
 
+        // Quiz functionality
+        const quizQuestions = [
+            {
+                question: "Pada tahun berapa Portugis pertama kali menguasai Malaka?",
+                options: ["1509", "1511", "1513", "1515"],
+                correct: 1
+            },
+            {
+                question: "Siapa yang mendirikan VOC (Vereenigde Oostindische Compagnie)?",
+                options: ["Pemerintah Belanda", "Jan Pieterszoon Coen", "Cornelis de Houtman", "Alfonso de Albuquerque"],
+                correct: 0
+            },
+            {
+                question: "Apa nama kota yang didirikan JP Coen setelah menghancurkan Jayakarta?",
+                options: ["Amsterdam", "Rotterdam", "Batavia", "Den Haag"],
+                correct: 2
+            },
+            {
+                question: "Sistem Tanam Paksa (Cultuurstelsel) diterapkan pada tahun?",
+                options: ["1825", "1830", "1835", "1840"],
+                correct: 1
+            },
+            {
+                question: "Siapa penggagas sistem Tanam Paksa?",
+                options: ["Jan Pieterszoon Coen", "Cornelis de Houtman", "Johannes van den Bosch", "Herman Willem Daendels"],
+                correct: 2
+            },
+            {
+                question: "Organisasi pergerakan nasional pertama di Indonesia adalah?",
+                options: ["Sarekat Islam", "Budi Utomo", "Indische Partij", "Perhimpunan Indonesia"],
+                correct: 1
+            },
+            {
+                question: "Budi Utomo didirikan pada tanggal?",
+                options: ["20 Mei 1908", "17 Agustus 1908", "28 Oktober 1908", "1 Juni 1908"],
+                correct: 0
+            },
+            {
+                question: "Apa tujuan utama Portugis datang ke Nusantara?",
+                options: ["Menyebarkan agama", "Mencari rempah-rempah", "Mencari emas", "Membangun koloni"],
+                correct: 1
+            },
+            {
+                question: "VOC memiliki hak istimewa yang disebut?",
+                options: ["Hak Monopoli", "Hak Oktroi", "Hak Souverein", "Hak Kolonial"],
+                correct: 1
+            },
+            {
+                question: "Dalam sistem Tanam Paksa, rakyat wajib menyediakan berapa bagian tanahnya?",
+                options: ["1/3", "1/4", "1/5", "1/6"],
+                correct: 2
+            },
+            {
+                question: "Siapa pendiri Budi Utomo?",
+                options: ["Dr. Sutomo", "Dr. Wahidin Sudirohusodo", "H.O.S. Tjokroaminoto", "Douwes Dekker"],
+                correct: 1
+            },
+            {
+                question: "Jepang mulai menduduki Indonesia pada tahun?",
+                options: ["1941", "1942", "1943", "1944"],
+                correct: 1
+            },
+            {
+                question: "Propaganda Jepang yang terkenal adalah?",
+                options: ["Asia untuk Eropa", "Asia untuk Asia", "Asia untuk Amerika", "Asia untuk Jepang"],
+                correct: 1
+            },
+            {
+                question: "Proklamasi kemerdekaan Indonesia dibacakan pada tanggal?",
+                options: ["16 Agustus 1945", "17 Agustus 1945", "18 Agustus 1945", "19 Agustus 1945"],
+                correct: 1
+            },
+            {
+                question: "Peristiwa Rengasdengklok terjadi pada tanggal?",
+                options: ["15 Agustus 1945", "16 Agustus 1945", "17 Agustus 1945", "18 Agustus 1945"],
+                correct: 1
+            },
+            {
+                question: "Siapa yang membacakan teks Proklamasi?",
+                options: ["Soekarno", "Hatta", "Ahmad Soebardjo", "Soekarno-Hatta"],
+                correct: 0
+            },
+            {
+                question: "Apa nama kerja paksa pada masa Jepang?",
+                options: ["Rodi", "Romusha", "Corvee", "Herendienst"],
+                correct: 1
+            },
+            {
+                question: "VOC dibubarkan pada tahun?",
+                options: ["1795", "1799", "1800", "1802"],
+                correct: 1
+            },
+            {
+                question: "Hari Kebangkitan Nasional diperingati setiap tanggal?",
+                options: ["17 Agustus", "20 Mei", "28 Oktober", "1 Juni"],
+                correct: 1
+            },
+            {
+                question: "Berapa lama Indonesia dijajah sebelum merdeka?",
+                options: ["3 abad", "3,5 abad", "4 abad", "4,5 abad"],
+                correct: 1
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let userAnswers = [];
+        let quizScore = 0;
+
+        function startQuiz() {
+            document.getElementById('quiz-page').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeQuiz() {
+            document.getElementById('quiz-page').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+            resetQuiz();
+        }
+
+        function beginQuiz() {
+            document.getElementById('quiz-start').classList.add('hidden');
+            document.getElementById('quiz-questions').classList.remove('hidden');
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const question = quizQuestions[currentQuestionIndex];
+            document.getElementById('question-text').textContent = question.question;
+            document.getElementById('current-question').textContent = currentQuestionIndex + 1;
+            document.getElementById('current-score').textContent = quizScore;
+            
+            const progressPercent = ((currentQuestionIndex + 1) / quizQuestions.length) * 100;
+            document.getElementById('progress-bar').style.width = progressPercent + '%';
+
+            const optionsContainer = document.getElementById('answer-options');
+            optionsContainer.innerHTML = '';
+
+            question.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.className = 'w-full text-left p-4 border-2 border-gray-200 rounded-lg hover:border-purple-400 hover:bg-purple-50 transition-colors';
+                button.textContent = `${String.fromCharCode(65 + index)}. ${option}`;
+                button.onclick = () => selectAnswer(index, button);
+                
+                if (userAnswers[currentQuestionIndex] === index) {
+                    button.classList.add('border-purple-600', 'bg-purple-100');
+                }
+                
+                optionsContainer.appendChild(button);
+            });
+
+            // Update navigation buttons
+            document.getElementById('prev-btn').disabled = currentQuestionIndex === 0;
+            document.getElementById('next-btn').disabled = userAnswers[currentQuestionIndex] === undefined;
+            
+            if (currentQuestionIndex === quizQuestions.length - 1) {
+                document.getElementById('next-btn').textContent = 'Selesai';
+            } else {
+                document.getElementById('next-btn').textContent = 'Selanjutnya';
+            }
+        }
+
+        function selectAnswer(answerIndex, buttonElement) {
+            // Remove previous selection
+            const buttons = document.querySelectorAll('#answer-options button');
+            buttons.forEach(btn => {
+                btn.classList.remove('border-purple-600', 'bg-purple-100');
+            });
+
+            // Add selection to clicked button
+            buttonElement.classList.add('border-purple-600', 'bg-purple-100');
+            
+            userAnswers[currentQuestionIndex] = answerIndex;
+            document.getElementById('next-btn').disabled = false;
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < quizQuestions.length - 1) {
+                currentQuestionIndex++;
+                loadQuestion();
+            } else {
+                finishQuiz();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                loadQuestion();
+            }
+        }
+
+        function finishQuiz() {
+            // Calculate score
+            quizScore = 0;
+            let correctCount = 0;
+            
+            for (let i = 0; i < quizQuestions.length; i++) {
+                if (userAnswers[i] === quizQuestions[i].correct) {
+                    quizScore += 5;
+                    correctCount++;
+                }
+            }
+
+            // Show results
+            document.getElementById('quiz-questions').classList.add('hidden');
+            document.getElementById('quiz-results').classList.remove('hidden');
+            
+            document.getElementById('final-score').textContent = quizScore;
+            document.getElementById('correct-answers').textContent = correctCount;
+            
+            // Set grade and emoji
+            const gradeText = document.getElementById('grade-text');
+            const resultEmoji = document.getElementById('result-emoji');
+            
+            if (quizScore >= 90) {
+                gradeText.textContent = "Luar Biasa! Anda Master Sejarah! 🏆";
+                gradeText.className = "text-lg font-semibold mt-2 text-yellow-600";
+                resultEmoji.textContent = "🏆";
+            } else if (quizScore >= 80) {
+                gradeText.textContent = "Sangat Baik! Pengetahuan Anda Hebat! 🌟";
+                gradeText.className = "text-lg font-semibold mt-2 text-green-600";
+                resultEmoji.textContent = "🌟";
+            } else if (quizScore >= 70) {
+                gradeText.textContent = "Baik! Terus Belajar Ya! 👍";
+                gradeText.className = "text-lg font-semibold mt-2 text-blue-600";
+                resultEmoji.textContent = "👍";
+            } else if (quizScore >= 60) {
+                gradeText.textContent = "Cukup! Masih Perlu Belajar Lagi 📚";
+                gradeText.className = "text-lg font-semibold mt-2 text-orange-600";
+                resultEmoji.textContent = "📚";
+            } else {
+                gradeText.textContent = "Perlu Belajar Lebih Giat! 💪";
+                gradeText.className = "text-lg font-semibold mt-2 text-red-600";
+                resultEmoji.textContent = "💪";
+            }
+        }
+
+        function restartQuiz() {
+            resetQuiz();
+            beginQuiz();
+        }
+
+        function resetQuiz() {
+            currentQuestionIndex = 0;
+            userAnswers = [];
+            quizScore = 0;
+            
+            document.getElementById('quiz-start').classList.remove('hidden');
+            document.getElementById('quiz-questions').classList.add('hidden');
+            document.getElementById('quiz-results').classList.add('hidden');
+        }
+
         // Close detail page with Escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closePage();
+                closeQuiz();
             }
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9849b9dc260da3da',t:'MTc1ODc5NDk2Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'984a7d9937ecce8a',t:'MTc1ODgwMjk4NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
