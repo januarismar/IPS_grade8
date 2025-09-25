@@ -184,16 +184,27 @@
         </div>
     </main>
 
-    <!-- Modal -->
-    <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 modal hidden z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <div class="p-6">
-                <div class="flex justify-between items-center mb-4">
-                    <h2 id="modal-title" class="text-2xl font-bold text-gray-800"></h2>
-                    <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+    <!-- Detail Page -->
+    <div id="detail-page" class="hidden fixed inset-0 bg-gradient-to-br from-amber-50 to-orange-100 z-50 overflow-y-auto">
+        <div class="min-h-screen">
+            <!-- Header -->
+            <header class="bg-gradient-to-r from-red-600 to-red-800 text-white py-6 px-6 shadow-lg">
+                <div class="max-w-4xl mx-auto flex items-center justify-between">
+                    <button onclick="closePage()" class="flex items-center space-x-2 bg-red-700 hover:bg-red-800 px-4 py-2 rounded-lg transition-colors">
+                        <span class="text-xl">←</span>
+                        <span>Kembali</span>
+                    </button>
+                    <h1 id="detail-title" class="text-2xl md:text-3xl font-bold text-center flex-1 mx-4"></h1>
+                    <div class="w-24"></div> <!-- Spacer for centering -->
                 </div>
-                <div id="modal-content" class="text-gray-700 leading-relaxed"></div>
-            </div>
+            </header>
+            
+            <!-- Content -->
+            <main class="max-w-4xl mx-auto px-6 py-8">
+                <div class="bg-white rounded-lg shadow-lg p-8">
+                    <div id="detail-content" class="text-gray-700 leading-relaxed text-lg"></div>
+                </div>
+            </main>
         </div>
     </div>
 
@@ -340,4 +351,103 @@
                             <li>Propaganda "Asia untuk Asia" dan "Jepang Saudara Tua"</li>
                             <li>Menghapus penggunaan bahasa Belanda</li>
                             <li>Memobilisasi rakyat untuk kepentingan perang</li>
-                            <li>Membentuk organisasi seperti PUTERA
+                            <li>Membentuk organisasi seperti PUTERA dan Jawa Hokokai</li>
+                        </ul>
+                        
+                        <div class="bg-red-50 p-4 rounded-lg mt-4">
+                            <p class="text-red-800"><strong>Penderitaan Rakyat:</strong> Romusha (kerja paksa), tanam paksa, dan kekurangan pangan membuat rakyat menderita.</p>
+                        </div>
+                    </div>
+                `
+            },
+            jepang2: {
+                title: "17 Agustus 1945 - Proklamasi Kemerdekaan Indonesia",
+                content: `
+                    <div class="space-y-4">
+                        <p><strong>Latar Belakang:</strong> Jepang menyerah kepada Sekutu setelah bom atom di Hiroshima dan Nagasaki. Para pemuda mendesak proklamasi segera.</p>
+                        
+                        <p><strong>Peristiwa Rengasdengklok:</strong></p>
+                        <ul class="list-disc pl-6 space-y-2">
+                            <li>16 Agustus: Pemuda membawa Soekarno-Hatta ke Rengasdengklok</li>
+                            <li>Mendesak proklamasi kemerdekaan segera</li>
+                            <li>Malam harinya kembali ke Jakarta</li>
+                        </ul>
+                        
+                        <p><strong>17 Agustus 1945:</strong></p>
+                        <ul class="list-disc pl-6 space-y-2">
+                            <li>Pukul 10.00: Proklamasi dibacakan di Jalan Pegangsaan Timur 56</li>
+                            <li>Teks proklamasi ditulis oleh Soekarno, Hatta, dan Ahmad Soebardjo</li>
+                            <li>Bendera Merah Putih dikibarkan</li>
+                            <li>Lagu Indonesia Raya dikumandangkan</li>
+                        </ul>
+                        
+                        <div class="bg-red-50 p-4 rounded-lg mt-4">
+                            <p class="text-red-800"><strong>Makna Bersejarah:</strong> Setelah 3,5 abad dijajah, Indonesia akhirnya merdeka dan menjadi negara yang berdaulat!</p>
+                        </div>
+                        
+                        <div class="text-center mt-6 p-4 bg-red-600 text-white rounded-lg">
+                            <p class="font-bold text-lg">🇮🇩 MERDEKA! 🇮🇩</p>
+                        </div>
+                    </div>
+                `
+            }
+        };
+
+        function showPeriod(period) {
+            const items = document.querySelectorAll('.timeline-item');
+            const buttons = document.querySelectorAll('.nav-btn');
+            
+            // Reset button styles
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-red-600', 'bg-blue-600', 'bg-orange-600', 'bg-red-700');
+                btn.classList.add('bg-gray-400');
+            });
+            
+            // Highlight active button
+            event.target.classList.remove('bg-gray-400');
+            if (period === 'all') event.target.classList.add('bg-red-600');
+            else if (period === 'portugis') event.target.classList.add('bg-blue-600');
+            else if (period === 'belanda') event.target.classList.add('bg-orange-600');
+            else if (period === 'jepang') event.target.classList.add('bg-red-700');
+            
+            items.forEach(item => {
+                if (period === 'all' || item.dataset.period === period) {
+                    item.style.display = 'block';
+                    item.classList.add('fade-in');
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        function openModal(dataKey) {
+            const detailPage = document.getElementById('detail-page');
+            const title = document.getElementById('detail-title');
+            const content = document.getElementById('detail-content');
+            
+            const data = modalData[dataKey];
+            title.textContent = data.title;
+            content.innerHTML = data.content;
+            
+            detailPage.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            
+            // Scroll to top of detail page
+            detailPage.scrollTop = 0;
+        }
+
+        function closePage() {
+            const detailPage = document.getElementById('detail-page');
+            detailPage.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close detail page with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePage();
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9849b9dc260da3da',t:'MTc1ODc5NDk2Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
