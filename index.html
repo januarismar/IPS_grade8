@@ -3,799 +3,975 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sejarah Penjajahan Indonesia</title>
+    <title>Peran Pancasila dalam Bernegara</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
             box-sizing: border-box;
         }
-        .timeline-item {
-            transition: all 0.3s ease;
-        }
-        .timeline-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-        .modal {
-            backdrop-filter: blur(5px);
-        }
         .fade-in {
-            animation: fadeIn 0.5s ease-in;
+            animation: fadeIn 0.6s ease-in;
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        .slide-in {
+            animation: slideIn 0.5s ease-out;
+        }
+        @keyframes slideIn {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+        .pulse-gentle {
+            animation: pulseGentle 2s infinite;
+        }
+        @keyframes pulseGentle {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
     </style>
 </head>
-<body class="bg-gradient-to-br from-amber-50 to-orange-100 min-h-screen font-sans">
-    <!-- Header -->
-    <header class="bg-gradient-to-r from-red-600 to-red-800 text-white py-8 px-6 shadow-lg">
-        <div class="max-w-6xl mx-auto text-center">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">🇮🇩 Sejarah Penjajahan Indonesia</h1>
-            <p class="text-xl opacity-90">Perjalanan Bangsa Indonesia Menuju Kemerdekaan</p>
+<body class="bg-gradient-to-br from-red-50 via-white to-yellow-50 min-h-screen">
+    <header class="bg-gradient-to-r from-red-600 to-red-700 text-white shadow-lg">
+        <div class="container mx-auto px-6 py-8">
+            <div class="flex items-center justify-center space-x-4">
+                <div class="text-6xl">🇮🇩</div>
+                <div class="text-center">
+                    <h1 class="text-4xl font-bold mb-2">Pancasila dalam Bernegara</h1>
+                    <p class="text-red-100 text-lg">Memahami Peran Dasar Negara Indonesia</p>
+                </div>
+            </div>
         </div>
     </header>
 
-    <!-- Navigation -->
-    <nav class="bg-white shadow-md sticky top-0 z-40">
-        <div class="max-w-6xl mx-auto px-6 py-4">
+    <main class="container mx-auto px-6 py-8">
+        <!-- Navigation Menu -->
+        <nav class="mb-8">
             <div class="flex flex-wrap justify-center gap-4">
-                <button onclick="showPeriod('all')" class="nav-btn bg-red-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-red-700 transition-colors">
-                    Semua Periode
+                <button onclick="showSection('overview')" class="nav-btn bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 shadow-md">
+                    📖 Pengantar
                 </button>
-                <button onclick="showPeriod('portugis')" class="nav-btn bg-blue-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-blue-700 transition-colors">
-                    Portugis (1511-1641)
+                <button onclick="showSection('sila')" class="nav-btn bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 shadow-md">
+                    ⭐ Lima Sila
                 </button>
-                <button onclick="showPeriod('belanda')" class="nav-btn bg-orange-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-orange-700 transition-colors">
-                    Belanda (1602-1942)
+                <button onclick="showSection('peran')" class="nav-btn bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 shadow-md">
+                    🏛️ Peran dalam Negara
                 </button>
-                <button onclick="showPeriod('jepang')" class="nav-btn bg-red-700 text-white px-6 py-2 rounded-full font-semibold hover:bg-red-800 transition-colors">
-                    Jepang (1942-1945)
+                <button onclick="showSection('implementasi')" class="nav-btn bg-orange-600 hover:bg-orange-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 shadow-md">
+                    🎯 Implementasi
                 </button>
-                <button onclick="startQuiz()" class="nav-btn bg-purple-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-purple-700 transition-colors">
-                    🧠 Kuis Sejarah
+                <button onclick="showSection('contoh')" class="nav-btn bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 shadow-md">
+                    🎒 Contoh untuk Siswa
+                </button>
+                <button onclick="showSection('quiz')" class="nav-btn bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 shadow-md">
+                    🧠 Kuis
                 </button>
             </div>
-        </div>
-    </nav>
+        </nav>
 
-    <!-- Main Content -->
-    <main class="max-w-6xl mx-auto px-6 py-8">
-        <!-- Timeline -->
-        <div class="relative">
-            <!-- Timeline Line -->
-            <div class="absolute left-1/2 transform -translate-x-1/2 w-1 bg-red-300 h-full"></div>
-            
-            <!-- Timeline Items -->
-            <div id="timeline" class="space-y-12">
-                <!-- Portugis Period -->
-                <div class="timeline-item portugis fade-in" data-period="portugis">
-                    <div class="flex items-center justify-between">
-                        <div class="w-5/12 text-right pr-8">
-                            <div class="bg-blue-600 text-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="openModal('portugis1')">
-                                <h3 class="text-xl font-bold mb-2">1511 - Kedatangan Portugis</h3>
-                                <p class="text-blue-100">Portugis menguasai Malaka dan mulai berdagang rempah-rempah</p>
-                                <span class="text-sm bg-blue-500 px-3 py-1 rounded-full mt-2 inline-block">Klik untuk detail</span>
-                            </div>
+        <!-- Overview Section -->
+        <section id="overview" class="content-section fade-in">
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">🇮🇩 Pancasila: Dasar Negara Indonesia</h2>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="space-y-6">
+                        <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-500">
+                            <h3 class="text-xl font-semibold text-blue-800 mb-3">Apa itu Pancasila?</h3>
+                            <p class="text-gray-700 leading-relaxed">
+                                Pancasila adalah dasar negara Republik Indonesia yang terdiri dari lima sila (prinsip). 
+                                Pancasila menjadi ideologi negara yang mengatur kehidupan berbangsa dan bernegara.
+                            </p>
                         </div>
-                        <div class="w-2/12 flex justify-center">
-                            <div class="w-6 h-6 bg-blue-600 rounded-full border-4 border-white shadow-lg"></div>
-                        </div>
-                        <div class="w-5/12"></div>
-                    </div>
-                </div>
-
-                <div class="timeline-item belanda fade-in" data-period="belanda">
-                    <div class="flex items-center justify-between">
-                        <div class="w-5/12"></div>
-                        <div class="w-2/12 flex justify-center">
-                            <div class="w-6 h-6 bg-orange-600 rounded-full border-4 border-white shadow-lg"></div>
-                        </div>
-                        <div class="w-5/12 pl-8">
-                            <div class="bg-orange-600 text-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="openModal('belanda1')">
-                                <h3 class="text-xl font-bold mb-2">1602 - VOC Didirikan</h3>
-                                <p class="text-orange-100">Vereenigde Oostindische Compagnie mulai menguasai perdagangan</p>
-                                <span class="text-sm bg-orange-500 px-3 py-1 rounded-full mt-2 inline-block">Klik untuk detail</span>
-                            </div>
+                        
+                        <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-500">
+                            <h3 class="text-xl font-semibold text-green-800 mb-3">Mengapa Penting?</h3>
+                            <p class="text-gray-700 leading-relaxed">
+                                Pancasila berperan sebagai pedoman dalam menjalankan pemerintahan, membuat kebijakan, 
+                                dan mengatur hubungan antar warga negara yang beragam.
+                            </p>
                         </div>
                     </div>
-                </div>
-
-                <div class="timeline-item belanda fade-in" data-period="belanda">
-                    <div class="flex items-center justify-between">
-                        <div class="w-5/12 text-right pr-8">
-                            <div class="bg-orange-700 text-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="openModal('belanda2')">
-                                <h3 class="text-xl font-bold mb-2">1619 - Batavia Didirikan</h3>
-                                <p class="text-orange-100">JP Coen mendirikan Batavia sebagai pusat kekuasaan VOC</p>
-                                <span class="text-sm bg-orange-600 px-3 py-1 rounded-full mt-2 inline-block">Klik untuk detail</span>
-                            </div>
+                    
+                    <div class="flex items-center justify-center">
+                        <div class="bg-gradient-to-br from-red-500 to-yellow-500 p-8 rounded-full text-white text-center pulse-gentle">
+                            <div class="text-6xl mb-4">🏛️</div>
+                            <div class="text-xl font-bold">PANCASILA</div>
+                            <div class="text-sm">Dasar Negara RI</div>
                         </div>
-                        <div class="w-2/12 flex justify-center">
-                            <div class="w-6 h-6 bg-orange-700 rounded-full border-4 border-white shadow-lg"></div>
-                        </div>
-                        <div class="w-5/12"></div>
-                    </div>
-                </div>
-
-                <div class="timeline-item belanda fade-in" data-period="belanda">
-                    <div class="flex items-center justify-between">
-                        <div class="w-5/12"></div>
-                        <div class="w-2/12 flex justify-center">
-                            <div class="w-6 h-6 bg-yellow-600 rounded-full border-4 border-white shadow-lg"></div>
-                        </div>
-                        <div class="w-5/12 pl-8">
-                            <div class="bg-yellow-600 text-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="openModal('belanda3')">
-                                <h3 class="text-xl font-bold mb-2">1830 - Sistem Tanam Paksa</h3>
-                                <p class="text-yellow-100">Van den Bosch menerapkan Cultuurstelsel yang menyengsarakan rakyat</p>
-                                <span class="text-sm bg-yellow-500 px-3 py-1 rounded-full mt-2 inline-block">Klik untuk detail</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item belanda fade-in" data-period="belanda">
-                    <div class="flex items-center justify-between">
-                        <div class="w-5/12 text-right pr-8">
-                            <div class="bg-green-600 text-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="openModal('belanda4')">
-                                <h3 class="text-xl font-bold mb-2">1908 - Kebangkitan Nasional</h3>
-                                <p class="text-green-100">Budi Utomo didirikan, menandai awal pergerakan nasional</p>
-                                <span class="text-sm bg-green-500 px-3 py-1 rounded-full mt-2 inline-block">Klik untuk detail</span>
-                            </div>
-                        </div>
-                        <div class="w-2/12 flex justify-center">
-                            <div class="w-6 h-6 bg-green-600 rounded-full border-4 border-white shadow-lg"></div>
-                        </div>
-                        <div class="w-5/12"></div>
-                    </div>
-                </div>
-
-                <div class="timeline-item jepang fade-in" data-period="jepang">
-                    <div class="flex items-center justify-between">
-                        <div class="w-5/12"></div>
-                        <div class="w-2/12 flex justify-center">
-                            <div class="w-6 h-6 bg-red-700 rounded-full border-4 border-white shadow-lg"></div>
-                        </div>
-                        <div class="w-5/12 pl-8">
-                            <div class="bg-red-700 text-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="openModal('jepang1')">
-                                <h3 class="text-xl font-bold mb-2">1942 - Jepang Menguasai Indonesia</h3>
-                                <p class="text-red-100">Belanda menyerah, Jepang mulai menduduki Indonesia</p>
-                                <span class="text-sm bg-red-600 px-3 py-1 rounded-full mt-2 inline-block">Klik untuk detail</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item jepang fade-in" data-period="jepang">
-                    <div class="flex items-center justify-between">
-                        <div class="w-5/12 text-right pr-8">
-                            <div class="bg-red-800 text-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="openModal('jepang2')">
-                                <h3 class="text-xl font-bold mb-2">1945 - Kemerdekaan Indonesia</h3>
-                                <p class="text-red-100">17 Agustus 1945, Soekarno-Hatta memproklamasikan kemerdekaan</p>
-                                <span class="text-sm bg-red-700 px-3 py-1 rounded-full mt-2 inline-block">Klik untuk detail</span>
-                            </div>
-                        </div>
-                        <div class="w-2/12 flex justify-center">
-                            <div class="w-8 h-8 bg-red-800 rounded-full border-4 border-white shadow-lg flex items-center justify-center">
-                                <span class="text-white text-lg">🇮🇩</span>
-                            </div>
-                        </div>
-                        <div class="w-5/12"></div>
                     </div>
                 </div>
             </div>
-        </div>
-    </main>
+        </section>
 
-    <!-- Detail Page -->
-    <div id="detail-page" class="hidden fixed inset-0 bg-gradient-to-br from-amber-50 to-orange-100 z-50 overflow-y-auto">
-        <div class="min-h-screen">
-            <!-- Header -->
-            <header class="bg-gradient-to-r from-red-600 to-red-800 text-white py-6 px-6 shadow-lg">
-                <div class="max-w-4xl mx-auto flex items-center justify-between">
-                    <button onclick="closePage()" class="flex items-center space-x-2 bg-red-700 hover:bg-red-800 px-4 py-2 rounded-lg transition-colors">
-                        <span class="text-xl">←</span>
-                        <span>Kembali</span>
-                    </button>
-                    <h1 id="detail-title" class="text-2xl md:text-3xl font-bold text-center flex-1 mx-4"></h1>
-                    <div class="w-24"></div> <!-- Spacer for centering -->
-                </div>
-            </header>
-            
-            <!-- Content -->
-            <main class="max-w-4xl mx-auto px-6 py-8">
-                <div class="bg-white rounded-lg shadow-lg p-8">
-                    <div id="detail-content" class="text-gray-700 leading-relaxed text-lg"></div>
-                </div>
-            </main>
-        </div>
-    </div>
-
-    <!-- Quiz Page -->
-    <div id="quiz-page" class="hidden fixed inset-0 bg-gradient-to-br from-purple-50 to-indigo-100 z-50 overflow-y-auto">
-        <div class="min-h-screen">
-            <!-- Header -->
-            <header class="bg-gradient-to-r from-purple-600 to-indigo-700 text-white py-6 px-6 shadow-lg">
-                <div class="max-w-4xl mx-auto flex items-center justify-between">
-                    <button onclick="closeQuiz()" class="flex items-center space-x-2 bg-purple-700 hover:bg-purple-800 px-4 py-2 rounded-lg transition-colors">
-                        <span class="text-xl">←</span>
-                        <span>Kembali</span>
-                    </button>
-                    <h1 class="text-2xl md:text-3xl font-bold text-center flex-1 mx-4">🧠 Kuis Sejarah Penjajahan Indonesia</h1>
-                    <div class="w-24"></div> <!-- Spacer for centering -->
-                </div>
-            </header>
-            
-            <!-- Quiz Content -->
-            <main class="max-w-4xl mx-auto px-6 py-8">
-                <!-- Quiz Start Screen -->
-                <div id="quiz-start" class="bg-white rounded-lg shadow-lg p-8 text-center">
-                    <div class="mb-8">
-                        <div class="text-6xl mb-4">🎯</div>
-                        <h2 class="text-3xl font-bold text-gray-800 mb-4">Siap Menguji Pengetahuan Anda?</h2>
-                        <p class="text-lg text-gray-600 mb-6">Kuis ini berisi 20 pertanyaan pilihan ganda tentang sejarah penjajahan Indonesia</p>
-                        <div class="bg-purple-50 p-4 rounded-lg mb-6">
-                            <p class="text-purple-800"><strong>Aturan:</strong></p>
-                            <ul class="text-purple-700 mt-2 space-y-1">
-                                <li>• 20 pertanyaan pilihan ganda</li>
-                                <li>• Setiap jawaban benar mendapat 5 poin</li>
-                                <li>• Tidak ada pengurangan poin untuk jawaban salah</li>
-                                <li>• Hasil akan ditampilkan di akhir kuis</li>
+        <!-- Lima Sila Section -->
+        <section id="sila" class="content-section hidden">
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">⭐ Lima Sila Pancasila</h2>
+                
+                <div class="space-y-6">
+                    <div class="sila-card bg-gradient-to-r from-blue-50 to-blue-100 p-6 rounded-lg border border-blue-200 cursor-pointer hover:shadow-lg transition-all duration-300" onclick="toggleSilaDetail(1)">
+                        <div class="flex items-center space-x-4">
+                            <div class="text-4xl">⭐</div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-blue-800">Sila Ke-1: Ketuhanan Yang Maha Esa</h3>
+                                <p class="text-blue-600 mt-2">Klik untuk melihat detail peran dalam bernegara</p>
+                            </div>
+                            <div class="text-2xl text-blue-600">▼</div>
+                        </div>
+                        <div id="detail-1" class="hidden mt-4 p-4 bg-white rounded-lg">
+                            <h4 class="font-semibold text-blue-800 mb-2">Peran dalam Bernegara:</h4>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>Menjamin kebebasan beragama dan beribadah</li>
+                                <li>Mencegah diskriminasi berdasarkan agama</li>
+                                <li>Membangun toleransi antar umat beragama</li>
+                                <li>Menjadikan nilai-nilai ketuhanan sebagai landasan moral negara</li>
                             </ul>
                         </div>
-                        <button onclick="beginQuiz()" class="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-lg text-xl font-semibold transition-colors">
-                            Mulai Kuis
-                        </button>
+                    </div>
+
+                    <div class="sila-card bg-gradient-to-r from-green-50 to-green-100 p-6 rounded-lg border border-green-200 cursor-pointer hover:shadow-lg transition-all duration-300" onclick="toggleSilaDetail(2)">
+                        <div class="flex items-center space-x-4">
+                            <div class="text-4xl">🤝</div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-green-800">Sila Ke-2: Kemanusiaan yang Adil dan Beradab</h3>
+                                <p class="text-green-600 mt-2">Klik untuk melihat detail peran dalam bernegara</p>
+                            </div>
+                            <div class="text-2xl text-green-600">▼</div>
+                        </div>
+                        <div id="detail-2" class="hidden mt-4 p-4 bg-white rounded-lg">
+                            <h4 class="font-semibold text-green-800 mb-2">Peran dalam Bernegara:</h4>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>Menjamin hak asasi manusia (HAM)</li>
+                                <li>Mencegah diskriminasi ras, suku, dan golongan</li>
+                                <li>Membangun kesetaraan dan keadilan sosial</li>
+                                <li>Mempromosikan perdamaian dan anti kekerasan</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="sila-card bg-gradient-to-r from-red-50 to-red-100 p-6 rounded-lg border border-red-200 cursor-pointer hover:shadow-lg transition-all duration-300" onclick="toggleSilaDetail(3)">
+                        <div class="flex items-center space-x-4">
+                            <div class="text-4xl">🇮🇩</div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-red-800">Sila Ke-3: Persatuan Indonesia</h3>
+                                <p class="text-red-600 mt-2">Klik untuk melihat detail peran dalam bernegara</p>
+                            </div>
+                            <div class="text-2xl text-red-600">▼</div>
+                        </div>
+                        <div id="detail-3" class="hidden mt-4 p-4 bg-white rounded-lg">
+                            <h4 class="font-semibold text-red-800 mb-2">Peran dalam Bernegara:</h4>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>Menjaga keutuhan wilayah NKRI</li>
+                                <li>Membangun rasa nasionalisme dan patriotisme</li>
+                                <li>Mencegah perpecahan dan separatisme</li>
+                                <li>Memperkuat identitas bangsa Indonesia</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="sila-card bg-gradient-to-r from-purple-50 to-purple-100 p-6 rounded-lg border border-purple-200 cursor-pointer hover:shadow-lg transition-all duration-300" onclick="toggleSilaDetail(4)">
+                        <div class="flex items-center space-x-4">
+                            <div class="text-4xl">🗳️</div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-purple-800">Sila Ke-4: Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan dalam Permusyawaratan/Perwakilan</h3>
+                                <p class="text-purple-600 mt-2">Klik untuk melihat detail peran dalam bernegara</p>
+                            </div>
+                            <div class="text-2xl text-purple-600">▼</div>
+                        </div>
+                        <div id="detail-4" class="hidden mt-4 p-4 bg-white rounded-lg">
+                            <h4 class="font-semibold text-purple-800 mb-2">Peran dalam Bernegara:</h4>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>Menjalankan sistem demokrasi Pancasila</li>
+                                <li>Mengutamakan musyawarah mufakat dalam pengambilan keputusan</li>
+                                <li>Menjamin partisipasi rakyat dalam pemerintahan</li>
+                                <li>Membangun kepemimpinan yang bijaksana dan bertanggung jawab</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="sila-card bg-gradient-to-r from-yellow-50 to-yellow-100 p-6 rounded-lg border border-yellow-200 cursor-pointer hover:shadow-lg transition-all duration-300" onclick="toggleSilaDetail(5)">
+                        <div class="flex items-center space-x-4">
+                            <div class="text-4xl">⚖️</div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-yellow-800">Sila Ke-5: Keadilan Sosial bagi Seluruh Rakyat Indonesia</h3>
+                                <p class="text-yellow-600 mt-2">Klik untuk melihat detail peran dalam bernegara</p>
+                            </div>
+                            <div class="text-2xl text-yellow-600">▼</div>
+                        </div>
+                        <div id="detail-5" class="hidden mt-4 p-4 bg-white rounded-lg">
+                            <h4 class="font-semibold text-yellow-800 mb-2">Peran dalam Bernegara:</h4>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>Mewujudkan kesejahteraan sosial yang merata</li>
+                                <li>Mengurangi kesenjangan ekonomi dan sosial</li>
+                                <li>Menjamin akses pendidikan dan kesehatan untuk semua</li>
+                                <li>Membangun ekonomi yang berkeadilan sosial</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <!-- Quiz Questions -->
-                <div id="quiz-questions" class="hidden bg-white rounded-lg shadow-lg p-8">
-                    <!-- Progress Bar -->
-                    <div class="mb-6">
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="text-sm font-medium text-gray-700">Pertanyaan <span id="current-question">1</span> dari 20</span>
-                            <span class="text-sm font-medium text-gray-700">Skor: <span id="current-score">0</span></span>
-                        </div>
-                        <div class="w-full bg-gray-200 rounded-full h-2">
-                            <div id="progress-bar" class="bg-purple-600 h-2 rounded-full transition-all duration-300" style="width: 5%"></div>
-                        </div>
+        <!-- Peran Section -->
+        <section id="peran" class="content-section hidden">
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">🏛️ Peran Pancasila dalam Sistem Ketatanegaraan</h2>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-gradient-to-br from-blue-500 to-blue-600 text-white p-6 rounded-lg shadow-lg">
+                        <div class="text-4xl mb-4">📜</div>
+                        <h3 class="text-xl font-bold mb-3">Dasar Hukum</h3>
+                        <p class="text-blue-100">Pancasila menjadi sumber dari segala sumber hukum di Indonesia, termasuk UUD 1945 dan peraturan perundang-undangan lainnya.</p>
                     </div>
 
-                    <!-- Question -->
-                    <div class="mb-8">
-                        <h3 id="question-text" class="text-xl font-bold text-gray-800 mb-6"></h3>
-                        <div id="answer-options" class="space-y-3"></div>
+                    <div class="bg-gradient-to-br from-green-500 to-green-600 text-white p-6 rounded-lg shadow-lg">
+                        <div class="text-4xl mb-4">🎯</div>
+                        <h3 class="text-xl font-bold mb-3">Pedoman Kebijakan</h3>
+                        <p class="text-green-100">Setiap kebijakan pemerintah harus selaras dengan nilai-nilai Pancasila dan tidak boleh bertentangan dengan prinsip-prinsipnya.</p>
                     </div>
 
-                    <!-- Navigation -->
-                    <div class="flex justify-between">
-                        <button id="prev-btn" onclick="previousQuestion()" class="bg-gray-500 hover:bg-gray-600 text-white px-6 py-2 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled>
-                            Sebelumnya
-                        </button>
-                        <button id="next-btn" onclick="nextQuestion()" class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled>
-                            Selanjutnya
-                        </button>
+                    <div class="bg-gradient-to-br from-purple-500 to-purple-600 text-white p-6 rounded-lg shadow-lg">
+                        <div class="text-4xl mb-4">🤝</div>
+                        <h3 class="text-xl font-bold mb-3">Pemersatu Bangsa</h3>
+                        <p class="text-purple-100">Pancasila menjadi perekat yang menyatukan keberagaman suku, agama, ras, dan budaya dalam satu kesatuan bangsa Indonesia.</p>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-red-500 to-red-600 text-white p-6 rounded-lg shadow-lg">
+                        <div class="text-4xl mb-4">⚖️</div>
+                        <h3 class="text-xl font-bold mb-3">Landasan Keadilan</h3>
+                        <p class="text-red-100">Sistem peradilan dan penegakan hukum di Indonesia berpedoman pada nilai-nilai keadilan yang terkandung dalam Pancasila.</p>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-yellow-500 to-yellow-600 text-white p-6 rounded-lg shadow-lg">
+                        <div class="text-4xl mb-4">🗳️</div>
+                        <h3 class="text-xl font-bold mb-3">Sistem Demokrasi</h3>
+                        <p class="text-yellow-100">Demokrasi Indonesia dijalankan berdasarkan Pancasila dengan mengutamakan musyawarah mufakat dan kepentingan bersama.</p>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-indigo-500 to-indigo-600 text-white p-6 rounded-lg shadow-lg">
+                        <div class="text-4xl mb-4">🌍</div>
+                        <h3 class="text-xl font-bold mb-3">Hubungan Internasional</h3>
+                        <p class="text-indigo-100">Pancasila menjadi landasan politik luar negeri Indonesia yang bebas aktif dan mengutamakan perdamaian dunia.</p>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <!-- Quiz Results -->
-                <div id="quiz-results" class="hidden bg-white rounded-lg shadow-lg p-8 text-center">
-                    <div class="mb-8">
-                        <div id="result-emoji" class="text-6xl mb-4"></div>
-                        <h2 class="text-3xl font-bold text-gray-800 mb-4">Kuis Selesai!</h2>
-                        <div class="bg-purple-50 p-6 rounded-lg mb-6">
-                            <p class="text-2xl font-bold text-purple-800 mb-2">Skor Anda: <span id="final-score">0</span>/100</p>
-                            <p class="text-lg text-purple-700">Jawaban Benar: <span id="correct-answers">0</span>/20</p>
-                            <p id="grade-text" class="text-lg font-semibold mt-2"></p>
+        <!-- Implementasi Section -->
+        <section id="implementasi" class="content-section hidden">
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">🎯 Implementasi Pancasila dalam Kehidupan Bernegara</h2>
+                
+                <div class="space-y-8">
+                    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg border-l-4 border-blue-500">
+                        <h3 class="text-2xl font-bold text-blue-800 mb-4">📋 Dalam Pemerintahan</h3>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <ul class="space-y-2">
+                                <li class="flex items-start space-x-2">
+                                    <span class="text-blue-600">✓</span>
+                                    <span class="text-gray-700">Pembuatan undang-undang yang selaras dengan Pancasila</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <span class="text-blue-600">✓</span>
+                                    <span class="text-gray-700">Kebijakan yang mengutamakan kepentingan rakyat</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <span class="text-blue-600">✓</span>
+                                    <span class="text-gray-700">Penegakan hukum yang adil dan tidak diskriminatif</span>
+                                </li>
+                            </ul>
+                            <ul class="space-y-2">
+                                <li class="flex items-start space-x-2">
+                                    <span class="text-blue-600">✓</span>
+                                    <span class="text-gray-700">Transparansi dan akuntabilitas pemerintahan</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <span class="text-blue-600">✓</span>
+                                    <span class="text-gray-700">Partisipasi masyarakat dalam pengambilan keputusan</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <span class="text-blue-600">✓</span>
+                                    <span class="text-gray-700">Pelayanan publik yang berkualitas</span>
+                                </li>
+                            </ul>
                         </div>
-                        <div class="space-y-3">
-                            <button onclick="restartQuiz()" class="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-lg text-lg font-semibold transition-colors mr-4">
+                    </div>
+
+                    <div class="bg-gradient-to-r from-green-50 to-emerald-50 p-6 rounded-lg border-l-4 border-green-500">
+                        <h3 class="text-2xl font-bold text-green-800 mb-4">🏫 Dalam Pendidikan</h3>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <ul class="space-y-2">
+                                <li class="flex items-start space-x-2">
+                                    <span class="text-green-600">✓</span>
+                                    <span class="text-gray-700">Pendidikan karakter berbasis Pancasila</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <span class="text-green-600">✓</span>
+                                    <span class="text-gray-700">Kurikulum yang menanamkan nilai-nilai Pancasila</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <span class="text-green-600">✓</span>
+                                    <span class="text-gray-700">Toleransi dan keberagaman dalam lingkungan sekolah</span>
+                                </li>
+                            </ul>
+                            <ul class="space-y-2">
+                                <li class="flex items-start space-x-2">
+                                    <span class="text-green-600">✓</span>
+                                    <span class="text-gray-700">Pendidikan kewarganegaraan yang komprehensif</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <span class="text-green-600">✓</span>
+                                    <span class="text-gray-700">Pembentukan generasi yang berkarakter Pancasila</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <span class="text-green-600">✓</span>
+                                    <span class="text-gray-700">Akses pendidikan yang merata untuk semua</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-r from-purple-50 to-violet-50 p-6 rounded-lg border-l-4 border-purple-500">
+                        <h3 class="text-2xl font-bold text-purple-800 mb-4">👥 Dalam Masyarakat</h3>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <ul class="space-y-2">
+                                <li class="flex items-start space-x-2">
+                                    <span class="text-purple-600">✓</span>
+                                    <span class="text-gray-700">Gotong royong dan kerja sama antar warga</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <span class="text-purple-600">✓</span>
+                                    <span class="text-gray-700">Toleransi beragama dan budaya</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <span class="text-purple-600">✓</span>
+                                    <span class="text-gray-700">Musyawarah dalam menyelesaikan masalah</span>
+                                </li>
+                            </ul>
+                            <ul class="space-y-2">
+                                <li class="flex items-start space-x-2">
+                                    <span class="text-purple-600">✓</span>
+                                    <span class="text-gray-700">Kepedulian sosial dan kemanusiaan</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <span class="text-purple-600">✓</span>
+                                    <span class="text-gray-700">Menjaga persatuan dan kesatuan</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <span class="text-purple-600">✓</span>
+                                    <span class="text-gray-700">Keadilan dalam interaksi sosial</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contoh Penerapan Section -->
+        <section id="contoh" class="content-section hidden">
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">🎒 Contoh Penerapan Pancasila untuk Siswa Sekolah</h2>
+                
+                <div class="space-y-8">
+                    <!-- Sila 1 -->
+                    <div class="bg-gradient-to-r from-blue-50 to-blue-100 p-6 rounded-lg border-l-4 border-blue-500">
+                        <div class="flex items-center mb-4">
+                            <div class="text-4xl mr-4">⭐</div>
+                            <h3 class="text-2xl font-bold text-blue-800">Sila 1: Ketuhanan Yang Maha Esa</h3>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-semibold text-blue-700 mb-3">Di Sekolah:</h4>
+                                <ul class="space-y-2 text-gray-700">
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-blue-600 mt-1">✓</span>
+                                        <span>Melaksanakan doa bersama sebelum dan sesudah belajar</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-blue-600 mt-1">✓</span>
+                                        <span>Menghormati teman yang sedang beribadah</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-blue-600 mt-1">✓</span>
+                                        <span>Tidak mengganggu kegiatan keagamaan teman</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-blue-600 mt-1">✓</span>
+                                        <span>Mengikuti pelajaran agama dengan sungguh-sungguh</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-blue-700 mb-3">Di Rumah & Masyarakat:</h4>
+                                <ul class="space-y-2 text-gray-700">
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-blue-600 mt-1">✓</span>
+                                        <span>Rajin beribadah sesuai agama masing-masing</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-blue-600 mt-1">✓</span>
+                                        <span>Menghormati tempat ibadah agama lain</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-blue-600 mt-1">✓</span>
+                                        <span>Bersyukur atas nikmat yang diberikan Tuhan</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-blue-600 mt-1">✓</span>
+                                        <span>Berteman dengan siapa saja tanpa memandang agama</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sila 2 -->
+                    <div class="bg-gradient-to-r from-green-50 to-green-100 p-6 rounded-lg border-l-4 border-green-500">
+                        <div class="flex items-center mb-4">
+                            <div class="text-4xl mr-4">🤝</div>
+                            <h3 class="text-2xl font-bold text-green-800">Sila 2: Kemanusiaan yang Adil dan Beradab</h3>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-semibold text-green-700 mb-3">Di Sekolah:</h4>
+                                <ul class="space-y-2 text-gray-700">
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-green-600 mt-1">✓</span>
+                                        <span>Membantu teman yang kesulitan belajar</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-green-600 mt-1">✓</span>
+                                        <span>Tidak melakukan bullying atau kekerasan</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-green-600 mt-1">✓</span>
+                                        <span>Menghargai perbedaan pendapat dalam diskusi</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-green-600 mt-1">✓</span>
+                                        <span>Memperlakukan semua teman dengan adil</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-green-700 mb-3">Di Rumah & Masyarakat:</h4>
+                                <ul class="space-y-2 text-gray-700">
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-green-600 mt-1">✓</span>
+                                        <span>Membantu orang yang membutuhkan</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-green-600 mt-1">✓</span>
+                                        <span>Menghormati hak-hak orang lain</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-green-600 mt-1">✓</span>
+                                        <span>Tidak membeda-bedakan teman berdasarkan suku atau ras</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-green-600 mt-1">✓</span>
+                                        <span>Berkata jujur dan tidak menyakiti perasaan orang</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sila 3 -->
+                    <div class="bg-gradient-to-r from-red-50 to-red-100 p-6 rounded-lg border-l-4 border-red-500">
+                        <div class="flex items-center mb-4">
+                            <div class="text-4xl mr-4">🇮🇩</div>
+                            <h3 class="text-2xl font-bold text-red-800">Sila 3: Persatuan Indonesia</h3>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-semibold text-red-700 mb-3">Di Sekolah:</h4>
+                                <ul class="space-y-2 text-gray-700">
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-red-600 mt-1">✓</span>
+                                        <span>Mengikuti upacara bendera dengan khidmat</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-red-600 mt-1">✓</span>
+                                        <span>Menyanyikan lagu Indonesia Raya dengan semangat</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-red-600 mt-1">✓</span>
+                                        <span>Bekerja sama dalam kegiatan sekolah</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-red-600 mt-1">✓</span>
+                                        <span>Menggunakan bahasa Indonesia yang baik dan benar</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-red-700 mb-3">Di Rumah & Masyarakat:</h4>
+                                <ul class="space-y-2 text-gray-700">
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-red-600 mt-1">✓</span>
+                                        <span>Bangga menggunakan produk buatan Indonesia</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-red-600 mt-1">✓</span>
+                                        <span>Melestarikan budaya daerah</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-red-600 mt-1">✓</span>
+                                        <span>Menghormati keberagaman suku dan budaya</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-red-600 mt-1">✓</span>
+                                        <span>Tidak memecah belah persatuan dengan SARA</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sila 4 -->
+                    <div class="bg-gradient-to-r from-purple-50 to-purple-100 p-6 rounded-lg border-l-4 border-purple-500">
+                        <div class="flex items-center mb-4">
+                            <div class="text-4xl mr-4">🗳️</div>
+                            <h3 class="text-2xl font-bold text-purple-800">Sila 4: Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan dalam Permusyawaratan/Perwakilan</h3>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-semibold text-purple-700 mb-3">Di Sekolah:</h4>
+                                <ul class="space-y-2 text-gray-700">
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-purple-600 mt-1">✓</span>
+                                        <span>Berpartisipasi dalam pemilihan ketua kelas</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-purple-600 mt-1">✓</span>
+                                        <span>Mengemukakan pendapat dalam diskusi kelas</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-purple-600 mt-1">✓</span>
+                                        <span>Menghargai keputusan bersama</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-purple-600 mt-1">✓</span>
+                                        <span>Mengikuti rapat OSIS dengan aktif</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-purple-700 mb-3">Di Rumah & Masyarakat:</h4>
+                                <ul class="space-y-2 text-gray-700">
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-purple-600 mt-1">✓</span>
+                                        <span>Bermusyawarah dengan keluarga dalam mengambil keputusan</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-purple-600 mt-1">✓</span>
+                                        <span>Mengikuti kegiatan RT/RW</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-purple-600 mt-1">✓</span>
+                                        <span>Mendengarkan pendapat orang lain</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-purple-600 mt-1">✓</span>
+                                        <span>Tidak memaksakan kehendak sendiri</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sila 5 -->
+                    <div class="bg-gradient-to-r from-yellow-50 to-yellow-100 p-6 rounded-lg border-l-4 border-yellow-500">
+                        <div class="flex items-center mb-4">
+                            <div class="text-4xl mr-4">⚖️</div>
+                            <h3 class="text-2xl font-bold text-yellow-800">Sila 5: Keadilan Sosial bagi Seluruh Rakyat Indonesia</h3>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-semibold text-yellow-700 mb-3">Di Sekolah:</h4>
+                                <ul class="space-y-2 text-gray-700">
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-yellow-600 mt-1">✓</span>
+                                        <span>Berbagi bekal dengan teman yang tidak membawa</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-yellow-600 mt-1">✓</span>
+                                        <span>Meminjamkan alat tulis kepada teman</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-yellow-600 mt-1">✓</span>
+                                        <span>Tidak membeda-bedakan teman berdasarkan status ekonomi</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-yellow-600 mt-1">✓</span>
+                                        <span>Berpartisipasi dalam kegiatan sosial sekolah</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-yellow-700 mb-3">Di Rumah & Masyarakat:</h4>
+                                <ul class="space-y-2 text-gray-700">
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-yellow-600 mt-1">✓</span>
+                                        <span>Membantu pekerjaan rumah sesuai kemampuan</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-yellow-600 mt-1">✓</span>
+                                        <span>Berpartisipasi dalam kerja bakti lingkungan</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-yellow-600 mt-1">✓</span>
+                                        <span>Menabung dan tidak boros</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-yellow-600 mt-1">✓</span>
+                                        <span>Membantu tetangga yang membutuhkan</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kegiatan Praktis -->
+                    <div class="bg-gradient-to-r from-indigo-50 to-indigo-100 p-6 rounded-lg border border-indigo-200">
+                        <h3 class="text-2xl font-bold text-indigo-800 mb-6 text-center">🎯 Kegiatan Praktis Sehari-hari</h3>
+                        <div class="grid md:grid-cols-3 gap-6">
+                            <div class="bg-white p-4 rounded-lg shadow-sm">
+                                <h4 class="font-semibold text-indigo-700 mb-3 text-center">🌅 Pagi Hari</h4>
+                                <ul class="space-y-2 text-sm text-gray-700">
+                                    <li>• Berdoa sebelum berangkat sekolah</li>
+                                    <li>• Mengucapkan salam kepada orang tua</li>
+                                    <li>• Menyanyikan lagu Indonesia Raya</li>
+                                    <li>• Berbagi sarapan dengan adik/kakak</li>
+                                </ul>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg shadow-sm">
+                                <h4 class="font-semibold text-indigo-700 mb-3 text-center">🏫 Di Sekolah</h4>
+                                <ul class="space-y-2 text-sm text-gray-700">
+                                    <li>• Menghormati guru dan teman</li>
+                                    <li>• Bekerja sama dalam tugas kelompok</li>
+                                    <li>• Ikut serta dalam kegiatan sekolah</li>
+                                    <li>• Menjaga kebersihan lingkungan</li>
+                                </ul>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg shadow-sm">
+                                <h4 class="font-semibold text-indigo-700 mb-3 text-center">🌆 Sore/Malam</h4>
+                                <ul class="space-y-2 text-sm text-gray-700">
+                                    <li>• Membantu pekerjaan rumah</li>
+                                    <li>• Belajar bersama teman</li>
+                                    <li>• Bermain tanpa membeda-bedakan</li>
+                                    <li>• Berdoa sebelum tidur</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tips Implementasi -->
+                    <div class="bg-gradient-to-r from-emerald-50 to-emerald-100 p-6 rounded-lg border border-emerald-200">
+                        <h3 class="text-2xl font-bold text-emerald-800 mb-4 text-center">💡 Tips Mudah Menerapkan Pancasila</h3>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-semibold text-emerald-700 mb-3">Mulai dari Hal Kecil:</h4>
+                                <ul class="space-y-2 text-gray-700">
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-emerald-600 mt-1">🌟</span>
+                                        <span>Tersenyum dan menyapa teman</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-emerald-600 mt-1">🌟</span>
+                                        <span>Mengucapkan terima kasih dan maaf</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-emerald-600 mt-1">🌟</span>
+                                        <span>Membuang sampah pada tempatnya</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-emerald-600 mt-1">🌟</span>
+                                        <span>Antri dengan tertib</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-emerald-700 mb-3">Jadikan Kebiasaan:</h4>
+                                <ul class="space-y-2 text-gray-700">
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-emerald-600 mt-1">🌟</span>
+                                        <span>Lakukan secara konsisten setiap hari</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-emerald-600 mt-1">🌟</span>
+                                        <span>Ajak teman untuk melakukan bersama</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-emerald-600 mt-1">🌟</span>
+                                        <span>Evaluasi diri setiap hari</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-emerald-600 mt-1">🌟</span>
+                                        <span>Ceritakan pengalaman positif kepada keluarga</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section id="quiz" class="content-section hidden">
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">🧠 Kuis Pemahaman Pancasila</h2>
+                
+                <div id="quiz-container">
+                    <div class="quiz-question bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-lg border border-blue-200 mb-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Pertanyaan <span id="question-number">1</span> dari 15</h3>
+                        <p id="question-text" class="text-lg text-gray-700 mb-6">Sila pertama Pancasila adalah...</p>
+                        
+                        <div id="answer-options" class="space-y-3">
+                            <button class="answer-btn w-full text-left p-4 bg-white border border-gray-300 rounded-lg hover:bg-blue-50 hover:border-blue-300 transition-all duration-300" onclick="selectAnswer(0)">
+                                A. Ketuhanan Yang Maha Esa
+                            </button>
+                            <button class="answer-btn w-full text-left p-4 bg-white border border-gray-300 rounded-lg hover:bg-blue-50 hover:border-blue-300 transition-all duration-300" onclick="selectAnswer(1)">
+                                B. Kemanusiaan yang Adil dan Beradab
+                            </button>
+                            <button class="answer-btn w-full text-left p-4 bg-white border border-gray-300 rounded-lg hover:bg-blue-50 hover:border-blue-300 transition-all duration-300" onclick="selectAnswer(2)">
+                                C. Persatuan Indonesia
+                            </button>
+                            <button class="answer-btn w-full text-left p-4 bg-white border border-gray-300 rounded-lg hover:bg-blue-50 hover:border-blue-300 transition-all duration-300" onclick="selectAnswer(3)">
+                                D. Keadilan Sosial bagi Seluruh Rakyat Indonesia
+                            </button>
+                        </div>
+                        
+                        <div class="mt-6 text-center">
+                            <button id="next-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 disabled:bg-gray-400 disabled:cursor-not-allowed" onclick="nextQuestion()" disabled>
+                                Selanjutnya
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div id="quiz-result" class="hidden text-center">
+                        <div class="bg-gradient-to-r from-green-50 to-blue-50 p-8 rounded-lg border border-green-200">
+                            <div class="text-6xl mb-4">🎉</div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-4">Kuis Selesai!</h3>
+                            <p class="text-xl text-gray-700 mb-6">Skor Anda: <span id="final-score" class="font-bold text-green-600">0</span> dari 15</p>
+                            <button class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300" onclick="restartQuiz()">
                                 Ulangi Kuis
                             </button>
-                            <button onclick="closeQuiz()" class="bg-gray-500 hover:bg-gray-600 text-white px-8 py-3 rounded-lg text-lg font-semibold transition-colors">
-                                Kembali ke Timeline
-                            </button>
                         </div>
                     </div>
                 </div>
-            </main>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-gray-300">© 2024 Aplikasi Pembelajaran Pancasila - Membangun Pemahaman Dasar Negara Indonesia</p>
         </div>
-    </div>
+    </footer>
 
     <script>
-        const modalData = {
-            portugis1: {
-                title: "1511 - Kedatangan Portugis di Nusantara",
-                content: `
-                    <div class="space-y-4">
-                        <p><strong>Latar Belakang:</strong> Portugis datang ke Nusantara untuk mencari rempah-rempah yang sangat berharga di Eropa, terutama lada, pala, dan cengkeh.</p>
-                        
-                        <p><strong>Peristiwa Penting:</strong></p>
-                        <ul class="list-disc pl-6 space-y-2">
-                            <li>Alfonso de Albuquerque menaklukkan Malaka pada 1511</li>
-                            <li>Malaka menjadi pusat perdagangan Portugis di Asia Tenggara</li>
-                            <li>Portugis menguasai jalur perdagangan rempah-rempah</li>
-                        </ul>
-                        
-                        <p><strong>Dampak:</strong> Mulai masuknya pengaruh Eropa ke Nusantara dan perubahan pola perdagangan tradisional.</p>
-                        
-                        <div class="bg-blue-50 p-4 rounded-lg mt-4">
-                            <p class="text-blue-800"><strong>Tahukah Anda?</strong> Rempah-rempah dari Nusantara pada masa itu lebih berharga daripada emas di Eropa!</p>
-                        </div>
-                    </div>
-                `
-            },
-            belanda1: {
-                title: "1602 - Pendirian VOC (Vereenigde Oostindische Compagnie)",
-                content: `
-                    <div class="space-y-4">
-                        <p><strong>Latar Belakang:</strong> Belanda mendirikan VOC untuk menyatukan perusahaan-perusahaan dagang Belanda dan bersaing dengan Portugis dan Spanyol.</p>
-                        
-                        <p><strong>Kekuasaan VOC:</strong></p>
-                        <ul class="list-disc pl-6 space-y-2">
-                            <li>Hak monopoli perdagangan di Asia</li>
-                            <li>Hak membuat perjanjian dengan raja-raja lokal</li>
-                            <li>Hak memiliki tentara dan membangun benteng</li>
-                            <li>Hak mencetak uang sendiri</li>
-                        </ul>
-                        
-                        <p><strong>Strategi:</strong> VOC menggunakan politik "devide et impera" (pecah belah) untuk menguasai kerajaan-kerajaan di Nusantara.</p>
-                        
-                        <div class="bg-orange-50 p-4 rounded-lg mt-4">
-                            <p class="text-orange-800"><strong>Fakta Menarik:</strong> VOC adalah perusahaan multinasional pertama di dunia yang menerbitkan saham!</p>
-                        </div>
-                    </div>
-                `
-            },
-            belanda2: {
-                title: "1619 - Pendirian Batavia oleh JP Coen",
-                content: `
-                    <div class="space-y-4">
-                        <p><strong>Peristiwa:</strong> Jan Pieterszoon Coen menghancurkan Jayakarta dan mendirikan Batavia sebagai pusat kekuasaan VOC di Asia.</p>
-                        
-                        <p><strong>Strategi JP Coen:</strong></p>
-                        <ul class="list-disc pl-6 space-y-2">
-                            <li>Menerapkan monopoli perdagangan secara ketat</li>
-                            <li>Menggunakan kekerasan untuk menundukkan perlawanan</li>
-                            <li>Membangun benteng yang kuat di Batavia</li>
-                        </ul>
-                        
-                        <p><strong>Dampak:</strong></p>
-                        <ul class="list-disc pl-6 space-y-2">
-                            <li>Batavia menjadi pusat administrasi kolonial</li>
-                            <li>Mulai diterapkannya sistem kerja paksa</li>
-                            <li>Perubahan struktur sosial masyarakat</li>
-                        </ul>
-                        
-                        <div class="bg-orange-50 p-4 rounded-lg mt-4">
-                            <p class="text-orange-800"><strong>Sejarah Nama:</strong> Batavia diambil dari nama suku Batavi, nenek moyang bangsa Belanda.</p>
-                        </div>
-                    </div>
-                `
-            },
-            belanda3: {
-                title: "1830 - Sistem Tanam Paksa (Cultuurstelsel)",
-                content: `
-                    <div class="space-y-4">
-                        <p><strong>Penggagas:</strong> Johannes van den Bosch menerapkan sistem ini untuk mengatasi krisis keuangan Belanda.</p>
-                        
-                        <p><strong>Aturan Tanam Paksa:</strong></p>
-                        <ul class="list-disc pl-6 space-y-2">
-                            <li>Rakyat wajib menyediakan 1/5 tanahnya untuk tanaman ekspor</li>
-                            <li>Atau bekerja 66 hari dalam setahun di perkebunan pemerintah</li>
-                            <li>Tanaman yang ditanam: kopi, tebu, nila, teh</li>
-                        </ul>
-                        
-                        <p><strong>Dampak Negatif:</strong></p>
-                        <ul class="list-disc pl-6 space-y-2">
-                            <li>Kelaparan dan kemiskinan merajalela</li>
-                            <li>Produksi pangan menurun drastis</li>
-                            <li>Rakyat menderita dan banyak yang meninggal</li>
-                        </ul>
-                        
-                        <div class="bg-red-50 p-4 rounded-lg mt-4">
-                            <p class="text-red-800"><strong>Tragedi:</strong> Sistem ini menyebabkan kelaparan besar di Cirebon (1843-1844) yang menewaskan ribuan orang.</p>
-                        </div>
-                    </div>
-                `
-            },
-            belanda4: {
-                title: "1908 - Kebangkitan Nasional Indonesia",
-                content: `
-                    <div class="space-y-4">
-                        <p><strong>Awal Pergerakan:</strong> Dr. Wahidin Sudirohusodo dan para mahasiswa STOVIA mendirikan Budi Utomo pada 20 Mei 1908.</p>
-                        
-                        <p><strong>Organisasi Pergerakan:</strong></p>
-                        <ul class="list-disc pl-6 space-y-2">
-                            <li><strong>Budi Utomo (1908):</strong> Organisasi modern pertama</li>
-                            <li><strong>Sarekat Islam (1912):</strong> Organisasi massa terbesar</li>
-                            <li><strong>Indische Partij (1912):</strong> Partai politik pertama</li>
-                            <li><strong>Perhimpunan Indonesia (1908):</strong> Organisasi mahasiswa di Belanda</li>
-                        </ul>
-                        
-                        <p><strong>Tokoh Penting:</strong></p>
-                        <ul class="list-disc pl-6 space-y-2">
-                            <li>Dr. Wahidin Sudirohusodo</li>
-                            <li>Dr. Sutomo</li>
-                            <li>H.O.S. Tjokroaminoto</li>
-                            <li>Douwes Dekker (Ernest Douwes Dekker)</li>
-                        </ul>
-                        
-                        <div class="bg-green-50 p-4 rounded-lg mt-4">
-                            <p class="text-green-800"><strong>Makna Penting:</strong> 20 Mei diperingati sebagai Hari Kebangkitan Nasional karena menandai awal kesadaran berbangsa dan bernegara.</p>
-                        </div>
-                    </div>
-                `
-            },
-            jepang1: {
-                title: "1942 - Pendudukan Jepang di Indonesia",
-                content: `
-                    <div class="space-y-4">
-                        <p><strong>Latar Belakang:</strong> Jepang menyerang Pearl Harbor (1941) dan mulai ekspansi ke Asia Tenggara, termasuk Indonesia.</p>
-                        
-                        <p><strong>Proses Pendudukan:</strong></p>
-                        <ul class="list-disc pl-6 space-y-2">
-                            <li>Januari 1942: Jepang menyerang Tarakan dan Balikpapan</li>
-                            <li>Februari 1942: Jepang menguasai Palembang</li>
-                            <li>Maret 1942: Belanda menyerah tanpa syarat</li>
-                        </ul>
-                        
-                        <p><strong>Kebijakan Jepang:</strong></p>
-                        <ul class="list-disc pl-6 space-y-2">
-                            <li>Propaganda "Asia untuk Asia" dan "Jepang Saudara Tua"</li>
-                            <li>Menghapus penggunaan bahasa Belanda</li>
-                            <li>Memobilisasi rakyat untuk kepentingan perang</li>
-                            <li>Membentuk organisasi seperti PUTERA dan Jawa Hokokai</li>
-                        </ul>
-                        
-                        <div class="bg-red-50 p-4 rounded-lg mt-4">
-                            <p class="text-red-800"><strong>Penderitaan Rakyat:</strong> Romusha (kerja paksa), tanam paksa, dan kekurangan pangan membuat rakyat menderita.</p>
-                        </div>
-                    </div>
-                `
-            },
-            jepang2: {
-                title: "17 Agustus 1945 - Proklamasi Kemerdekaan Indonesia",
-                content: `
-                    <div class="space-y-4">
-                        <p><strong>Latar Belakang:</strong> Jepang menyerah kepada Sekutu setelah bom atom di Hiroshima dan Nagasaki. Para pemuda mendesak proklamasi segera.</p>
-                        
-                        <p><strong>Peristiwa Rengasdengklok:</strong></p>
-                        <ul class="list-disc pl-6 space-y-2">
-                            <li>16 Agustus: Pemuda membawa Soekarno-Hatta ke Rengasdengklok</li>
-                            <li>Mendesak proklamasi kemerdekaan segera</li>
-                            <li>Malam harinya kembali ke Jakarta</li>
-                        </ul>
-                        
-                        <p><strong>17 Agustus 1945:</strong></p>
-                        <ul class="list-disc pl-6 space-y-2">
-                            <li>Pukul 10.00: Proklamasi dibacakan di Jalan Pegangsaan Timur 56</li>
-                            <li>Teks proklamasi ditulis oleh Soekarno, Hatta, dan Ahmad Soebardjo</li>
-                            <li>Bendera Merah Putih dikibarkan</li>
-                            <li>Lagu Indonesia Raya dikumandangkan</li>
-                        </ul>
-                        
-                        <div class="bg-red-50 p-4 rounded-lg mt-4">
-                            <p class="text-red-800"><strong>Makna Bersejarah:</strong> Setelah 3,5 abad dijajah, Indonesia akhirnya merdeka dan menjadi negara yang berdaulat!</p>
-                        </div>
-                        
-                        <div class="text-center mt-6 p-4 bg-red-600 text-white rounded-lg">
-                            <p class="font-bold text-lg">🇮🇩 MERDEKA! 🇮🇩</p>
-                        </div>
-                    </div>
-                `
-            }
-        };
-
-        function showPeriod(period) {
-            const items = document.querySelectorAll('.timeline-item');
-            const buttons = document.querySelectorAll('.nav-btn');
-            
-            // Reset button styles
-            buttons.forEach(btn => {
-                btn.classList.remove('bg-red-600', 'bg-blue-600', 'bg-orange-600', 'bg-red-700');
-                btn.classList.add('bg-gray-400');
-            });
-            
-            // Highlight active button
-            event.target.classList.remove('bg-gray-400');
-            if (period === 'all') event.target.classList.add('bg-red-600');
-            else if (period === 'portugis') event.target.classList.add('bg-blue-600');
-            else if (period === 'belanda') event.target.classList.add('bg-orange-600');
-            else if (period === 'jepang') event.target.classList.add('bg-red-700');
-            
-            items.forEach(item => {
-                if (period === 'all' || item.dataset.period === period) {
-                    item.style.display = 'block';
-                    item.classList.add('fade-in');
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-        }
-
-        function openModal(dataKey) {
-            const detailPage = document.getElementById('detail-page');
-            const title = document.getElementById('detail-title');
-            const content = document.getElementById('detail-content');
-            
-            const data = modalData[dataKey];
-            title.textContent = data.title;
-            content.innerHTML = data.content;
-            
-            detailPage.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-            
-            // Scroll to top of detail page
-            detailPage.scrollTop = 0;
-        }
-
-        function closePage() {
-            const detailPage = document.getElementById('detail-page');
-            detailPage.classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Quiz functionality
-        const quizQuestions = [
+        // Quiz data
+        const quizData = [
             {
-                question: "Pada tahun berapa Portugis pertama kali menguasai Malaka?",
-                options: ["1509", "1511", "1513", "1515"],
-                correct: 1
-            },
-            {
-                question: "Siapa yang mendirikan VOC (Vereenigde Oostindische Compagnie)?",
-                options: ["Pemerintah Belanda", "Jan Pieterszoon Coen", "Cornelis de Houtman", "Alfonso de Albuquerque"],
+                question: "Sila pertama Pancasila adalah...",
+                options: ["Ketuhanan Yang Maha Esa", "Kemanusiaan yang Adil dan Beradab", "Persatuan Indonesia", "Keadilan Sosial bagi Seluruh Rakyat Indonesia"],
                 correct: 0
             },
             {
-                question: "Apa nama kota yang didirikan JP Coen setelah menghancurkan Jayakarta?",
-                options: ["Amsterdam", "Rotterdam", "Batavia", "Den Haag"],
-                correct: 2
-            },
-            {
-                question: "Sistem Tanam Paksa (Cultuurstelsel) diterapkan pada tahun?",
-                options: ["1825", "1830", "1835", "1840"],
+                question: "Pancasila berperan sebagai... dalam sistem ketatanegaraan Indonesia",
+                options: ["Undang-undang biasa", "Dasar negara dan ideologi", "Peraturan daerah", "Kebijakan pemerintah"],
                 correct: 1
             },
             {
-                question: "Siapa penggagas sistem Tanam Paksa?",
-                options: ["Jan Pieterszoon Coen", "Cornelis de Houtman", "Johannes van den Bosch", "Herman Willem Daendels"],
+                question: "Sila keempat Pancasila mengajarkan tentang...",
+                options: ["Toleransi beragama", "Persatuan bangsa", "Demokrasi dan musyawarah", "Keadilan ekonomi"],
                 correct: 2
             },
             {
-                question: "Organisasi pergerakan nasional pertama di Indonesia adalah?",
-                options: ["Sarekat Islam", "Budi Utomo", "Indische Partij", "Perhimpunan Indonesia"],
+                question: "Implementasi Pancasila dalam kehidupan bernegara meliputi...",
+                options: ["Hanya dalam pemerintahan", "Hanya dalam pendidikan", "Dalam semua aspek kehidupan", "Hanya dalam hukum"],
+                correct: 2
+            },
+            {
+                question: "Nilai utama yang ditekankan dalam sila kelima Pancasila adalah...",
+                options: ["Persatuan", "Demokrasi", "Ketuhanan", "Keadilan sosial"],
+                correct: 3
+            },
+            {
+                question: "Sila kedua Pancasila 'Kemanusiaan yang Adil dan Beradab' dalam bernegara bertujuan untuk...",
+                options: ["Menjamin kebebasan beragama", "Melindungi hak asasi manusia", "Memperkuat persatuan bangsa", "Mengutamakan musyawarah"],
                 correct: 1
             },
             {
-                question: "Budi Utomo didirikan pada tanggal?",
-                options: ["20 Mei 1908", "17 Agustus 1908", "28 Oktober 1908", "1 Juni 1908"],
+                question: "Dalam sistem demokrasi Pancasila, pengambilan keputusan sebaiknya melalui...",
+                options: ["Voting mayoritas", "Keputusan pemimpin", "Musyawarah mufakat", "Undian"],
+                correct: 2
+            },
+            {
+                question: "Pancasila sebagai dasar negara pertama kali dirumuskan oleh...",
+                options: ["Soekarno", "Mohammad Hatta", "Soepomo", "Mohammad Yamin"],
                 correct: 0
             },
             {
-                question: "Apa tujuan utama Portugis datang ke Nusantara?",
-                options: ["Menyebarkan agama", "Mencari rempah-rempah", "Mencari emas", "Membangun koloni"],
-                correct: 1
-            },
-            {
-                question: "VOC memiliki hak istimewa yang disebut?",
-                options: ["Hak Monopoli", "Hak Oktroi", "Hak Souverein", "Hak Kolonial"],
-                correct: 1
-            },
-            {
-                question: "Dalam sistem Tanam Paksa, rakyat wajib menyediakan berapa bagian tanahnya?",
-                options: ["1/3", "1/4", "1/5", "1/6"],
+                question: "Lambang sila ketiga Pancasila adalah...",
+                options: ["Bintang", "Rantai", "Pohon Beringin", "Kepala Banteng"],
                 correct: 2
             },
             {
-                question: "Siapa pendiri Budi Utomo?",
-                options: ["Dr. Sutomo", "Dr. Wahidin Sudirohusodo", "H.O.S. Tjokroaminoto", "Douwes Dekker"],
+                question: "Prinsip gotong royong dalam masyarakat Indonesia merupakan implementasi dari sila...",
+                options: ["Pertama dan kedua", "Kedua dan ketiga", "Ketiga dan keempat", "Keempat dan kelima"],
                 correct: 1
             },
             {
-                question: "Jepang mulai menduduki Indonesia pada tahun?",
-                options: ["1941", "1942", "1943", "1944"],
-                correct: 1
+                question: "Pancasila sebagai pandangan hidup bangsa Indonesia disebut juga sebagai...",
+                options: ["Weltanschauung", "Ideologi terbuka", "Dasar falsafah negara", "Semua jawaban benar"],
+                correct: 3
             },
             {
-                question: "Propaganda Jepang yang terkenal adalah?",
-                options: ["Asia untuk Eropa", "Asia untuk Asia", "Asia untuk Amerika", "Asia untuk Jepang"],
-                correct: 1
+                question: "Dalam konteks bernegara, toleransi beragama merupakan implementasi dari sila...",
+                options: ["Pertama", "Kedua", "Ketiga", "Pertama dan kedua"],
+                correct: 3
             },
             {
-                question: "Proklamasi kemerdekaan Indonesia dibacakan pada tanggal?",
-                options: ["16 Agustus 1945", "17 Agustus 1945", "18 Agustus 1945", "19 Agustus 1945"],
-                correct: 1
+                question: "Sistem ekonomi Indonesia yang sesuai dengan Pancasila adalah...",
+                options: ["Ekonomi liberal", "Ekonomi sosialis", "Ekonomi Pancasila/kerakyatan", "Ekonomi campuran"],
+                correct: 2
             },
             {
-                question: "Peristiwa Rengasdengklok terjadi pada tanggal?",
-                options: ["15 Agustus 1945", "16 Agustus 1945", "17 Agustus 1945", "18 Agustus 1945"],
-                correct: 1
+                question: "Bhinneka Tunggal Ika sebagai semboyan negara Indonesia mencerminkan sila...",
+                options: ["Pertama", "Kedua", "Ketiga", "Keempat"],
+                correct: 2
             },
             {
-                question: "Siapa yang membacakan teks Proklamasi?",
-                options: ["Soekarno", "Hatta", "Ahmad Soebardjo", "Soekarno-Hatta"],
-                correct: 0
-            },
-            {
-                question: "Apa nama kerja paksa pada masa Jepang?",
-                options: ["Rodi", "Romusha", "Corvee", "Herendienst"],
-                correct: 1
-            },
-            {
-                question: "VOC dibubarkan pada tahun?",
-                options: ["1795", "1799", "1800", "1802"],
-                correct: 1
-            },
-            {
-                question: "Hari Kebangkitan Nasional diperingati setiap tanggal?",
-                options: ["17 Agustus", "20 Mei", "28 Oktober", "1 Juni"],
-                correct: 1
-            },
-            {
-                question: "Berapa lama Indonesia dijajah sebelum merdeka?",
-                options: ["3 abad", "3,5 abad", "4 abad", "4,5 abad"],
+                question: "Dalam menyelesaikan konflik antar daerah, pendekatan yang sesuai dengan Pancasila adalah...",
+                options: ["Menggunakan kekuatan militer", "Mediasi dan dialog", "Memberikan otonomi penuh", "Mengabaikan masalah"],
                 correct: 1
             }
         ];
 
-        let currentQuestionIndex = 0;
-        let userAnswers = [];
-        let quizScore = 0;
+        let currentQuestion = 0;
+        let score = 0;
+        let selectedAnswer = -1;
 
-        function startQuiz() {
-            document.getElementById('quiz-page').classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeQuiz() {
-            document.getElementById('quiz-page').classList.add('hidden');
-            document.body.style.overflow = 'auto';
-            resetQuiz();
-        }
-
-        function beginQuiz() {
-            document.getElementById('quiz-start').classList.add('hidden');
-            document.getElementById('quiz-questions').classList.remove('hidden');
-            loadQuestion();
-        }
-
-        function loadQuestion() {
-            const question = quizQuestions[currentQuestionIndex];
-            document.getElementById('question-text').textContent = question.question;
-            document.getElementById('current-question').textContent = currentQuestionIndex + 1;
-            document.getElementById('current-score').textContent = quizScore;
-            
-            const progressPercent = ((currentQuestionIndex + 1) / quizQuestions.length) * 100;
-            document.getElementById('progress-bar').style.width = progressPercent + '%';
-
-            const optionsContainer = document.getElementById('answer-options');
-            optionsContainer.innerHTML = '';
-
-            question.options.forEach((option, index) => {
-                const button = document.createElement('button');
-                button.className = 'w-full text-left p-4 border-2 border-gray-200 rounded-lg hover:border-purple-400 hover:bg-purple-50 transition-colors';
-                button.textContent = `${String.fromCharCode(65 + index)}. ${option}`;
-                button.onclick = () => selectAnswer(index, button);
-                
-                if (userAnswers[currentQuestionIndex] === index) {
-                    button.classList.add('border-purple-600', 'bg-purple-100');
-                }
-                
-                optionsContainer.appendChild(button);
+        // Navigation functions
+        function showSection(sectionName) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.add('hidden');
+                section.classList.remove('fade-in');
             });
 
+            // Show selected section
+            const targetSection = document.getElementById(sectionName);
+            targetSection.classList.remove('hidden');
+            setTimeout(() => {
+                targetSection.classList.add('fade-in');
+            }, 50);
+
             // Update navigation buttons
-            document.getElementById('prev-btn').disabled = currentQuestionIndex === 0;
-            document.getElementById('next-btn').disabled = userAnswers[currentQuestionIndex] === undefined;
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach(btn => {
+                btn.classList.remove('ring-2', 'ring-white', 'ring-opacity-50');
+            });
+            event.target.classList.add('ring-2', 'ring-white', 'ring-opacity-50');
+        }
+
+        // Sila detail toggle
+        function toggleSilaDetail(silaNumber) {
+            const detail = document.getElementById(`detail-${silaNumber}`);
+            const isHidden = detail.classList.contains('hidden');
             
-            if (currentQuestionIndex === quizQuestions.length - 1) {
-                document.getElementById('next-btn').textContent = 'Selesai';
-            } else {
-                document.getElementById('next-btn').textContent = 'Selanjutnya';
+            // Hide all other details
+            for (let i = 1; i <= 5; i++) {
+                document.getElementById(`detail-${i}`).classList.add('hidden');
+            }
+            
+            // Toggle current detail
+            if (isHidden) {
+                detail.classList.remove('hidden');
+                detail.classList.add('slide-in');
             }
         }
 
-        function selectAnswer(answerIndex, buttonElement) {
-            // Remove previous selection
-            const buttons = document.querySelectorAll('#answer-options button');
-            buttons.forEach(btn => {
-                btn.classList.remove('border-purple-600', 'bg-purple-100');
-            });
-
-            // Add selection to clicked button
-            buttonElement.classList.add('border-purple-600', 'bg-purple-100');
+        // Quiz functions
+        function selectAnswer(answerIndex) {
+            selectedAnswer = answerIndex;
             
-            userAnswers[currentQuestionIndex] = answerIndex;
+            // Reset all buttons
+            const buttons = document.querySelectorAll('.answer-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-blue-100', 'border-blue-500', 'text-blue-800');
+                btn.classList.add('bg-white', 'border-gray-300');
+            });
+            
+            // Highlight selected button
+            buttons[answerIndex].classList.remove('bg-white', 'border-gray-300');
+            buttons[answerIndex].classList.add('bg-blue-100', 'border-blue-500', 'text-blue-800');
+            
+            // Enable next button
             document.getElementById('next-btn').disabled = false;
         }
 
         function nextQuestion() {
-            if (currentQuestionIndex < quizQuestions.length - 1) {
-                currentQuestionIndex++;
+            // Check answer
+            if (selectedAnswer === quizData[currentQuestion].correct) {
+                score++;
+            }
+            
+            currentQuestion++;
+            selectedAnswer = -1;
+            
+            if (currentQuestion < quizData.length) {
                 loadQuestion();
             } else {
-                finishQuiz();
+                showResult();
             }
         }
 
-        function previousQuestion() {
-            if (currentQuestionIndex > 0) {
-                currentQuestionIndex--;
-                loadQuestion();
-            }
+        function loadQuestion() {
+            const question = quizData[currentQuestion];
+            document.getElementById('question-number').textContent = currentQuestion + 1;
+            document.getElementById('question-text').textContent = question.question;
+            
+            const buttons = document.querySelectorAll('.answer-btn');
+            buttons.forEach((btn, index) => {
+                btn.textContent = String.fromCharCode(65 + index) + '. ' + question.options[index];
+                btn.classList.remove('bg-blue-100', 'border-blue-500', 'text-blue-800');
+                btn.classList.add('bg-white', 'border-gray-300');
+            });
+            
+            document.getElementById('next-btn').disabled = true;
         }
 
-        function finishQuiz() {
-            // Calculate score
-            quizScore = 0;
-            let correctCount = 0;
-            
-            for (let i = 0; i < quizQuestions.length; i++) {
-                if (userAnswers[i] === quizQuestions[i].correct) {
-                    quizScore += 5;
-                    correctCount++;
-                }
-            }
-
-            // Show results
-            document.getElementById('quiz-questions').classList.add('hidden');
-            document.getElementById('quiz-results').classList.remove('hidden');
-            
-            document.getElementById('final-score').textContent = quizScore;
-            document.getElementById('correct-answers').textContent = correctCount;
-            
-            // Set grade and emoji
-            const gradeText = document.getElementById('grade-text');
-            const resultEmoji = document.getElementById('result-emoji');
-            
-            if (quizScore >= 90) {
-                gradeText.textContent = "Luar Biasa! Anda Master Sejarah! 🏆";
-                gradeText.className = "text-lg font-semibold mt-2 text-yellow-600";
-                resultEmoji.textContent = "🏆";
-            } else if (quizScore >= 80) {
-                gradeText.textContent = "Sangat Baik! Pengetahuan Anda Hebat! 🌟";
-                gradeText.className = "text-lg font-semibold mt-2 text-green-600";
-                resultEmoji.textContent = "🌟";
-            } else if (quizScore >= 70) {
-                gradeText.textContent = "Baik! Terus Belajar Ya! 👍";
-                gradeText.className = "text-lg font-semibold mt-2 text-blue-600";
-                resultEmoji.textContent = "👍";
-            } else if (quizScore >= 60) {
-                gradeText.textContent = "Cukup! Masih Perlu Belajar Lagi 📚";
-                gradeText.className = "text-lg font-semibold mt-2 text-orange-600";
-                resultEmoji.textContent = "📚";
-            } else {
-                gradeText.textContent = "Perlu Belajar Lebih Giat! 💪";
-                gradeText.className = "text-lg font-semibold mt-2 text-red-600";
-                resultEmoji.textContent = "💪";
-            }
+        function showResult() {
+            document.querySelector('.quiz-question').classList.add('hidden');
+            document.getElementById('quiz-result').classList.remove('hidden');
+            document.getElementById('final-score').textContent = score;
         }
 
         function restartQuiz() {
-            resetQuiz();
-            beginQuiz();
-        }
-
-        function resetQuiz() {
-            currentQuestionIndex = 0;
-            userAnswers = [];
-            quizScore = 0;
+            currentQuestion = 0;
+            score = 0;
+            selectedAnswer = -1;
             
-            document.getElementById('quiz-start').classList.remove('hidden');
-            document.getElementById('quiz-questions').classList.add('hidden');
-            document.getElementById('quiz-results').classList.add('hidden');
+            document.querySelector('.quiz-question').classList.remove('hidden');
+            document.getElementById('quiz-result').classList.add('hidden');
+            
+            loadQuestion();
         }
 
-        // Close detail page with Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closePage();
-                closeQuiz();
-            }
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('overview');
+            loadQuestion();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'984a7d9937ecce8a',t:'MTc1ODgwMjk4NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98fd8a14e283e793',t:'MTc2MDY4MDQ0Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
